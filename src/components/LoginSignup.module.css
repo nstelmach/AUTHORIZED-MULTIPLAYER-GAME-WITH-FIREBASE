@@ -1,0 +1,136 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.questionWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  font-size: 30px;
+  margin: 15px;
+}
+
+.button {
+  border-radius: 40px;
+  padding: 10px;
+  margin: 20px;
+  width: 220px;
+  font-size: 16px;
+}
+
+.subtitles {
+  font-size: 16px;
+  text-decoration: none;
+  color: white;
+  margin: 5px;
+}
+
+.label {
+  font-size: 14px;
+}
+
+.checkbox {
+  border: 1px solid #edcd5a;
+  cursor: pointer;
+}
+
+.wrapperCheck {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .header {
+    font-size: 60px;
+    margin: 40px;
+  }
+  .input {
+    height: 40px;
+    margin: 10px;
+    margin-top: 15px;
+    width: 250px;
+    font-size: 16px;
+    padding-left: 15px;
+  }
+  .button {
+    margin: 30px;
+    width: 250px;
+    font-size: 20px;
+  }
+  .subtitles {
+    font-size: 22px;
+    margin: 10px;
+  }
+
+  .label {
+    font-size: 18px;
+    margin-left: 5px;
+  }
+  .wrapperCheck {
+    margin: 10px;
+  }
+  .link {
+    text-decoration: underline;
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .header {
+    font-size: 50px;
+    margin: 25px;
+  }
+  .input {
+    height: 25px;
+    width: 250px;
+    padding: 15px;
+    font-size: 18px;
+    margin: 10px;
+    margin-top: 20px;
+  }
+  .button {
+    padding: 15px;
+    margin: 30px;
+    width: 280px;
+    font-size: 22px;
+  }
+  .subtitles {
+    font-size: 22px;
+    margin: 15px;
+  }
+  .label {
+    font-size: 22px;
+    margin-left: 10px;
+  }
+  .wrapperCheck {
+    margin: 15px;
+  }
+  .link {
+    text-decoration: underline;
+    font-size: 22px;
+  }
+}

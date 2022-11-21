@@ -1,0 +1,115 @@
+.headerWriting {
+  font-size: 50px;
+  margin: 30px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  border-bottom: 2px dashed #edcd5a;
+}
+
+.userIcon {
+  position: absolute;
+  right: 0;
+  margin-right: 46px;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  background-color: #2a6767;
+  border: none;
+  border-radius: 15px;
+  border: 1px solid #edcd5a;
+}
+
+.icon {
+  color: white;
+}
+
+.userIcon:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.menuWrapper {
+  background-color: #2a6767;
+  border: 1px solid #edcd5a;
+  border-radius: 10px;
+  padding: 10px;
+  width: 220px;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  right: 10px;
+  top: 90px;
+  z-index: 5;
+}
+
+.wrapper {
+  width: 100vw;
+  display: flex;
+}
+
+.menuElement {
+  margin: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.menuElement:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.emailElement {
+  margin: 5px;
+  color: white;
+}
+
+.margin {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 700px) {
+  .userIcon {
+    top: 150px;
+    margin-right: 20px;
+    width: 60px;
+    height: 60px;
+  }
+  .menuWrapper {
+    width: 70%;
+    height: 50%;
+    right: 15px;
+    top: 220px;
+  }
+  .menuElement {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 900px) {
+  .headerWriting {
+    font-size: 60px;
+  }
+  .userIcon {
+    width: 70px;
+    height: 70px;
+  }
+  .menuWrapper {
+    width: 120px;
+    top: 110px;
+  }
+  .menuElement {
+    margin: 15px;
+    font-size: 20px;
+  }
+}

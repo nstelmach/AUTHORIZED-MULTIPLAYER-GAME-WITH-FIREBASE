@@ -1,0 +1,38 @@
+.square {
+  border-top: 3px solid #edcd5a;
+  border-left: 3px solid #edcd5a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.square:nth-child(1),
+.square:nth-child(2),
+.square:nth-child(3) {
+  border-top: none;
+}
+
+.square:nth-child(1),
+.square:nth-child(4),
+.square:nth-child(7) {
+  border-left: none;
+}
+
+.XValue {
+  font-size: 75px;
+  font-weight: 500;
+  color: #2a6767;
+}
+
+.OValue {
+  font-size: 75px;
+  font-weight: 500;
+  color: white;
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .XValue,
+  .OValue {
+    font-size: 85px;
+  }
+}

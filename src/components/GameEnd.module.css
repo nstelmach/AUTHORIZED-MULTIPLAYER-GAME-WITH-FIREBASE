@@ -1,0 +1,56 @@
+.button {
+  margin: 20px 0;
+  width: 150px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.wrapper {
+  background-color: white;
+  width: 60%;
+  max-width: 700px;
+  border-radius: 20px;
+  border: 3px solid #edcd5a;
+}
+
+.background {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subtitles {
+  text-align: center;
+  color: #2a6767;
+  margin: 20px 0;
+  font-size: 25px;
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    width: 95%;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .wrapper {
+    width: 60%;
+  }
+  .subtitles {
+    font-size: 30px;
+  }
+  .button {
+    font-size: 25px;
+  }
+}
