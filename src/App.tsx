@@ -1,10 +1,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import LoginSignup from "./components/LoginSignup";
-import History from "./components/History";
-import NewGame from "./components/NewGame";
-import GameEnd from "./components/GameEnd";
+import Home from "./routes/Home";
+import LoginSignup from "./routes/LoginSignup";
+import History from "./routes/History";
+import NewGame from "./routes/NewGame";
+import GameEnd from "./components/modal/GameEnd";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -57,7 +57,7 @@ function App() {
           }
         />
         <Route
-          path="playergame"
+          path="/room/:id"
           element={
             <PrivateRoute>
               <NewGame isPlayerGame={true} />

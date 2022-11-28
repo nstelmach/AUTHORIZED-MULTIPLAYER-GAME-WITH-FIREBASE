@@ -11,6 +11,7 @@ function Board({ game, onSquareClick }: BoardProps) {
   const makeNineSquares = game.map((circleOrCross, index) => {
     return (
       <Square
+        key={index}
         onClick={() => {
           onSquareClick(index);
         }}

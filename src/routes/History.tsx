@@ -1,7 +1,7 @@
 import React from "react";
 import { Chart } from "react-google-charts";
 import classes from "./History.module.css";
-import Header from "./Header";
+import Header from "../components/Header";
 
 function History() {
   const data = [

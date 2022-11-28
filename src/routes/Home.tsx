@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./Home.module.css";
-import Header from "./Header";
-import Button from "./Button";
+import Header from "../components/Header";
+import Button from "../components/Button";
 
 function Home() {
   return (
@@ -11,7 +11,7 @@ function Home() {
       <div className={classes.contentWrapper}>
         <div className={classes.subtitles}>Choose one</div>
         <div className={classes.buttonsWrapper}>
-          <Link to="/playergame">
+          <Link to="/room/:id">
             <Button
               type="button"
               disabled={false}

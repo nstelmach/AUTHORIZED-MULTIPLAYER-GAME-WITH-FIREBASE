@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./LoginSignup.module.css";
-import Button from "./Button";
-import Input from "./Input";
+import Button from "../components/Button";
+import Input from "../components/Input";
 import { useAuth } from "../contexts/AuthContext";
 import { Alert } from "react-bootstrap";
 

@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./GameEnd.module.css";
-import Button from "./Button";
+import Button from "../Button";
+import onYes from "../../routes/NewGame";
+import onNo from "../../routes/NewGame";
 
 function GameEnd() {
   return (
@@ -14,6 +16,7 @@ function GameEnd() {
             type="button"
             disabled={false}
             className={classes.button}
+            // onClick={onYes}
             text="Yes"
           />
           <Link className={classes.button} to="/">
@@ -21,6 +24,7 @@ function GameEnd() {
               type="button"
               disabled={false}
               className={classes.button}
+              // onClick={onNo}
               text="No"
             />
           </Link>

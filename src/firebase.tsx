@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const app = initializeApp({
@@ -12,7 +13,6 @@ const app = initializeApp({
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 });
 
-console.log(process.env.REACT_APP_FIREBASE_API_KEY);
-
 export const auth = getAuth(app);
+export const db = getFirestore(app);
 export default app;
