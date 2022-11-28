@@ -7,17 +7,17 @@ import { CircleOrCross } from "./Square";
 
 export type GameProps = {
   onSquareClick: (index: number) => void;
-
   game: CircleOrCross[];
   gameStatus: GameStatus;
+  onClick: () => void;
 };
 
-function Game({ onSquareClick, game, gameStatus }: GameProps) {
+function Game({ onSquareClick, game, gameStatus, onClick }: GameProps) {
   return (
     <div className={classes.game}>
       <Board onSquareClick={onSquareClick} game={game} />
       {(gameStatus === GameStatus.OWinner ||
-        gameStatus === GameStatus.XWinner) && <GameEnd />}
+        gameStatus === GameStatus.XWinner) && <GameEnd onClick={onClick} />}
     </div>
   );
 }

@@ -4,7 +4,6 @@ import Home from "./routes/Home";
 import LoginSignup from "./routes/LoginSignup";
 import History from "./routes/History";
 import NewGame from "./routes/NewGame";
-import GameEnd from "./components/modal/GameEnd";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -57,7 +56,7 @@ function App() {
           }
         />
         <Route
-          path="/room/:id"
+          path="/room/:roomId"
           element={
             <PrivateRoute>
               <NewGame isPlayerGame={true} />
@@ -72,7 +71,6 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="gameend" element={<GameEnd />} />
       </Routes>
     </AuthProvider>
   );

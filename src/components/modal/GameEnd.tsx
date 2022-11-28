@@ -2,10 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./GameEnd.module.css";
 import Button from "../Button";
-import onYes from "../../routes/NewGame";
-import onNo from "../../routes/NewGame";
+// import onYes from "../../routes/NewGame";
+// import onNo from "../../routes/NewGame";
 
-function GameEnd() {
+export type GameEndProps = {
+  onClick: () => void;
+};
+
+function GameEnd({ onClick }) {
   return (
     <div className={classes.background}>
       <div className={classes.wrapper}>
@@ -16,7 +20,7 @@ function GameEnd() {
             type="button"
             disabled={false}
             className={classes.button}
-            // onClick={onYes}
+            onClick={onClick}
             text="Yes"
           />
           <Link className={classes.button} to="/">
@@ -24,7 +28,6 @@ function GameEnd() {
               type="button"
               disabled={false}
               className={classes.button}
-              // onClick={onNo}
               text="No"
             />
           </Link>

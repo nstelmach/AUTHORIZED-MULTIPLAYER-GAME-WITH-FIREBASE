@@ -3,10 +3,11 @@ import Game from "../components/game/Game";
 import classes from "./NewGame.module.css";
 import Header from "../components/Header";
 // import { useState } from "react";
-import { useParams } from "react-router";
 import useRoom from "../hooks/useRoom";
 import useMarkBoard from "../hooks/useMark";
 import { CircleOrCross } from "../components/game/Square";
+import { useParams } from "react-router";
+import useClearBoard from "../hooks/useClearBoard";
 
 export type NewGameProps = {
   isPlayerGame: boolean;
@@ -93,11 +94,11 @@ export function getUpdatedGame(
 }
 
 function NewGame({ isPlayerGame }: NewGameProps) {
-  const { id } = useParams();
-  const { isFetching, room } = useRoom(id || "");
-  const { isMarking, markBoard } = useMarkBoard(id || "", room!);
+  const { roomId } = useParams();
+  const { isFetching, room } = useRoom();
+  const { isMarking, markBoard } = useMarkBoard(room!);
   const { game, gameStatus } = room || {};
-
+  const { clearBoard } = useClearBoard();
   if (isFetching) return <h1>Loading Room...</h1>;
   if (!room) return <h1>Room Not Found</h1>;
 
@@ -111,7 +112,7 @@ function NewGame({ isPlayerGame }: NewGameProps) {
 
   function onSquareClickHandler(index: number) {
     if (!isMarking && game![index] === null) markBoard(index, room!);
-    if (isMarking) {
+    if (isMarking && !game![index]) {
       game![index] = null;
     }
 
@@ -135,13 +136,11 @@ function NewGame({ isPlayerGame }: NewGameProps) {
     // });
   }
 
-  function resetGameHandler() {
-    // setStateGame(({ game, gameStatus }) => {
-    //   game = [null, null, null, null, null, null, null, null, null];
-    //   gameStatus = GameStatus.OTurn;
-    //   return { game, gameStatus };
-    // });
-  }
+  // setStateGame(({ game, gameStatus }) => {
+  //   game = [null, null, null, null, null, null, null, null, null];
+  //   gameStatus = GameStatus.OTurn;
+  //   return { game, gameStatus };
+  // });
 
   return (
     <div className={classes.wrapper}>
@@ -156,16 +155,17 @@ function NewGame({ isPlayerGame }: NewGameProps) {
           onSquareClick={onSquareClickHandler}
           game={game || []}
           gameStatus={gameStatus!}
+          onClick={clearBoard}
         />
         {isPlayerGame && (
           <div className={classes.linkWrapper}>
             <div className={classes.subtitles}>Link to the game: </div>
-            <div className={classes.link}>https://link.com/{id}</div>
+            <div className={classes.link}>https://link.com/{roomId}</div>
           </div>
         )}
         {!isPlayerGame && (
           <div
-            onClick={resetGameHandler}
+            onClick={clearBoard}
             className={`${classes.link} ${classes.subtitles}`}
           >
             Reset Game

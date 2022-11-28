@@ -3,6 +3,7 @@ import { GameStatus } from "../routes/NewGame";
 import { CircleOrCross } from "../components/game/Square";
 import { db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
+import { useParams } from "react-router";
 
 export interface Room {
   game: CircleOrCross[];
@@ -14,12 +15,13 @@ interface Output {
   room?: Room;
 }
 
-const useRoom = (id: string): Output => {
+const useRoom = (): Output => {
+  const { roomId } = useParams();
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [room, setRoom] = useState<Room | undefined>();
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(doc(db, "rooms", id), (doc) => {
+    const unsubscribe = onSnapshot(doc(db, "rooms", roomId!), (doc) => {
       if (doc.exists()) setRoom(doc.data() as Room);
       else console.log("Room Not Found");
       setIsFetching(false);
@@ -27,7 +29,7 @@ const useRoom = (id: string): Output => {
     return () => {
       unsubscribe();
     };
-  }, [id]);
+  }, [roomId]);
   return { isFetching, room };
 };
 

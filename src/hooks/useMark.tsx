@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { Room } from "./useRoom";
 import { getUpdatedGame } from "../routes/NewGame";
+import { useParams } from "react-router";
 
 interface Output {
   isMarking: boolean;
   markBoard: (boardIndex: number, room: Room) => void;
 }
 
-const useMarkBoard = (roomId: string, room: Room): Output => {
+const useMarkBoard = (room: Room): Output => {
+  const { roomId } = useParams();
   const [isMarking, setIsMarking] = useState<boolean>(false);
 
   async function markBoard(boardIndex: number) {
@@ -27,7 +29,7 @@ const useMarkBoard = (roomId: string, room: Room): Output => {
         boardIndex
       );
 
-      await updateDoc(doc(db, "rooms", roomId), {
+      await updateDoc(doc(db, "rooms", roomId!), {
         game: updatedGame,
         gameStatus: updatedGameStatus,
       });
