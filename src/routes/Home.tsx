@@ -4,13 +4,17 @@ import classes from "./Home.module.css";
 import Header from "../components/Header";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import useCreateRoom from "../hooks/useCreateRoom";
 
 function Home() {
   let navigate = useNavigate();
+  const { createRoom, isCreatingRoom } = useCreateRoom();
 
-  function handleClick() {
-    navigate("/room/AAAA");
+  async function handleCreateRoom() {
+    const roomId = await createRoom();
+    navigate(`/r/${roomId}`);
   }
+
   return (
     <div className={classes.wrapper}>
       <Header />
@@ -19,7 +23,7 @@ function Home() {
         <div className={classes.buttonsWrapper}>
           <div>
             <Button
-              onClick={handleClick}
+              onClick={handleCreateRoom}
               type="button"
               disabled={false}
               className={classes.button}

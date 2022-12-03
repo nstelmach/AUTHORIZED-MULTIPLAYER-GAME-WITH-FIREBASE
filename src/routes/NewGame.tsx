@@ -5,21 +5,17 @@ import Header from "../components/Header";
 // import { useState } from "react";
 import useRoom from "../hooks/useRoom";
 import useMarkBoard from "../hooks/useMark";
-import { CircleOrCross } from "../components/game/Square";
+import { CircleOrCross } from "../types/types";
 import { useParams } from "react-router";
 import useClearBoard from "../hooks/useClearBoard";
+import { GameStatus } from "../types/types";
+
+import { useAuth } from "../contexts/AuthContext";
+import PlayerDisplay from "../components/PlayerDisplay";
 
 export type NewGameProps = {
   isPlayerGame: boolean;
 };
-
-export enum GameStatus {
-  Draw = "draw",
-  XWinner = "xWinner",
-  OWinner = "oWinner",
-  XTurn = "xTurn",
-  OTurn = "oTurn",
-}
 
 function calculateGameStatus(
   game: CircleOrCross[],
@@ -97,8 +93,10 @@ function NewGame({ isPlayerGame }: NewGameProps) {
   const { roomId } = useParams();
   const { isFetching, room } = useRoom();
   const { isMarking, markBoard } = useMarkBoard(room!);
-  const { game, gameStatus } = room || {};
+  const { game, gameStatus, playerOId, playerXId } = room || {};
   const { clearBoard } = useClearBoard();
+  const { user } = useAuth();
+
   if (isFetching) return <h1>Loading Room...</h1>;
   if (!room) return <h1>Room Not Found</h1>;
 
@@ -110,8 +108,15 @@ function NewGame({ isPlayerGame }: NewGameProps) {
   //   gameStatus: GameStatus.OTurn,
   // });
 
-  function onSquareClickHandler(index: number) {
-    if (!isMarking && game![index] === null) markBoard(index, room!);
+  async function onSquareClickHandler(index: number) {
+    if (!isMarking && game![index] === null) {
+      if (
+        (gameStatus === GameStatus.XTurn && user?.uid === playerXId) ||
+        (gameStatus === GameStatus.OTurn && user?.uid === playerOId)
+      )
+        await markBoard(index, room!);
+    }
+
     if (isMarking && !game![index]) {
       game![index] = null;
     }
@@ -147,30 +152,34 @@ function NewGame({ isPlayerGame }: NewGameProps) {
       <Header />
       <div className={classes.contentWrapper}>
         <div className={classes.score}>
-          <div>0</div>
-          <div className={classes.colon}>:</div>
-          <div>0</div>
-        </div>
-        <Game
-          onSquareClick={onSquareClickHandler}
-          game={game || []}
-          gameStatus={gameStatus!}
-          onClick={clearBoard}
-        />
-        {isPlayerGame && (
-          <div className={classes.linkWrapper}>
-            <div className={classes.subtitles}>Link to the game: </div>
-            <div className={classes.link}>https://link.com/{roomId}</div>
+          <div>
+            <PlayerDisplay player="X" />
+            <PlayerDisplay player="O" />
+            <div>0</div>
+            <div className={classes.colon}>:</div>
+            <div>0</div>
           </div>
-        )}
-        {!isPlayerGame && (
-          <div
+          <Game
+            onSquareClick={onSquareClickHandler}
+            game={game || []}
+            gameStatus={gameStatus!}
             onClick={clearBoard}
-            className={`${classes.link} ${classes.subtitles}`}
-          >
-            Reset Game
-          </div>
-        )}
+          />
+          {isPlayerGame && (
+            <div className={classes.linkWrapper}>
+              <div className={classes.subtitles}>Link to the game: </div>
+              <div className={classes.link}>https://link.com/{roomId}</div>
+            </div>
+          )}
+          {!isPlayerGame && (
+            <div
+              onClick={clearBoard}
+              className={`${classes.link} ${classes.subtitles}`}
+            >
+              Reset Game
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

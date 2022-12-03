@@ -5,36 +5,50 @@ import {
   User,
 } from "firebase/auth";
 import React, { useContext, useState, useEffect, ReactNode } from "react";
-import { useOutletContext } from "react-router-dom";
 import { auth } from "../firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 export type AuthContextType = {
-  currentUser: null | User;
+  user: undefined | User;
   signup: (email: string, password: string) => Promise<UserCredential | void>;
   login: (email: string, password: string) => Promise<UserCredential | void>;
   logout: () => Promise<void>;
 };
 
+export type AuthProviderProps = {
+  children: ReactNode;
+};
+
 const AuthContext = React.createContext<AuthContextType>({
-  currentUser: null,
+  user: undefined,
   signup: async () => {},
   login: async () => {},
   logout: async () => {},
 });
 
-export type AuthProviderProps = {
-  children: ReactNode;
-};
-
 export function useAuth() {
   return useContext(AuthContext);
 }
+
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | undefined>(undefined);
+  // const { user } = useUser(userId);
   const [loading, setLoading] = useState(true);
 
-  function signup(email: string, password: string) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  async function signup(email: string, password: string) {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const currentUser = res.user;
+      await setDoc(doc(db, "users", currentUser.uid), {
+        id: currentUser.uid,
+        displayName: currentUser?.email?.split("@")[0],
+        email: currentUser.email,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    return;
   }
 
   function login(email: string, password: string) {
@@ -46,15 +60,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user?.uid) {
+        const document = await getDoc(doc(db, "users", user?.uid));
+        if (document.exists())
+          return setUser({ ...document.data(), uid: document.id } as User);
+        setLoading(false);
+      }
+      setUser(undefined);
       setLoading(false);
     });
     return unsubscribe;
   }, []);
 
   const value = {
-    currentUser,
+    user,
     signup,
     login,
     logout,

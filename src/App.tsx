@@ -56,7 +56,7 @@ function App() {
           }
         />
         <Route
-          path="/room/:roomId"
+          path="/r/:roomId"
           element={
             <PrivateRoute>
               <NewGame isPlayerGame={true} />

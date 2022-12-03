@@ -2,8 +2,8 @@ import React from "react";
 import Board from "./Board";
 import classes from "./Game.module.css";
 import GameEnd from "../modal/GameEnd";
-import { GameStatus } from "../../routes/NewGame";
-import { CircleOrCross } from "./Square";
+import { GameStatus } from "../../types/types";
+import { CircleOrCross } from "../../types/types";
 
 export type GameProps = {
   onSquareClick: (index: number) => void;
@@ -17,7 +17,8 @@ function Game({ onSquareClick, game, gameStatus, onClick }: GameProps) {
     <div className={classes.game}>
       <Board onSquareClick={onSquareClick} game={game} />
       {(gameStatus === GameStatus.OWinner ||
-        gameStatus === GameStatus.XWinner) && <GameEnd onClick={onClick} />}
+        gameStatus === GameStatus.XWinner ||
+        gameStatus === GameStatus.Draw) && <GameEnd onClick={onClick} />}
     </div>
   );
 }

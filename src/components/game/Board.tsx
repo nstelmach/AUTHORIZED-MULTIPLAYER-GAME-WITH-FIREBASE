@@ -1,5 +1,6 @@
 import React from "react";
-import Square, { CircleOrCross } from "./Square";
+import { CircleOrCross } from "../../types/types";
+import Square from "./Square";
 import classes from "./Board.module.css";
 
 export type BoardProps = {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { Room } from "./useRoom";
+import { Room } from "../types/types";
 import { getUpdatedGame } from "../routes/NewGame";
 import { useParams } from "react-router";
 

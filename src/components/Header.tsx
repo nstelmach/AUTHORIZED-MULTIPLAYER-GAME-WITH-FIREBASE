@@ -6,7 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 function Header() {
   const [error, setError] = useState("");
-  const { currentUser, logout } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   function menuClickHandler() {
@@ -37,7 +37,7 @@ function Header() {
       <div id="menu" className={classes.menuWrapper}>
         <div className={classes.emailElement}>Email:</div>{" "}
         <div className={`${classes.emailElement} ${classes.margin}`}>
-          {currentUser?.email}
+          {user?.email}
         </div>
         <Link to="/" className={classes.menuElement}>
           Home

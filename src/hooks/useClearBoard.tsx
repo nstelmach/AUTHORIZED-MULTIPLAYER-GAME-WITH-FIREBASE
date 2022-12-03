@@ -1,7 +1,6 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useParams } from "react-router";
-import { GameStatus } from "../routes/NewGame";
 
 interface Output {
   clearBoard: () => void;
@@ -10,11 +9,12 @@ interface Output {
 const useClearBoard = (): Output => {
   const { roomId } = useParams();
 
+  const startingTurn = Math.round(Math.random()) ? "oTurn" : "xTurn";
   async function clearBoard() {
     try {
       await updateDoc(doc(db, "rooms", roomId!), {
         game: [null, null, null, null, null, null, null, null, null],
-        gameStatus: GameStatus.OTurn,
+        gameStatus: startingTurn,
       });
     } catch (err) {
       console.error(err);

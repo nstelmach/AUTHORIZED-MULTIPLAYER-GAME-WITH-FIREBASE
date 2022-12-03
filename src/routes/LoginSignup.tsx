@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import classes from "./LoginSignup.module.css";
 import Button from "../components/Button";
 import Input from "../components/Input";
@@ -29,6 +29,7 @@ function LoginSignup({
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { search } = useLocation();
 
   async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -41,7 +42,9 @@ function LoginSignup({
           ? await login(emailRef.current?.value!, passwordRef.current?.value!)
           : await signup(emailRef.current?.value!, passwordRef.current?.value!);
       }
-      navigate("/");
+      isLogin
+        ? navigate(`/${search.substr(1).replace("_", "/")}`)
+        : navigate("/");
     } catch {
       {
         isLogin

@@ -1,7 +1,6 @@
 import React from "react";
 import classes from "./Square.module.css";
-
-export type CircleOrCross = "X" | "O" | null;
+import { CircleOrCross } from "../../types/types";
 
 export type SquareProps = {
   circleOrCross: CircleOrCross;
