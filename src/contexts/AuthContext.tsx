@@ -68,9 +68,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         setLoading(false);
       }
       setUser(undefined);
-      setLoading(false);
     });
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const value = {

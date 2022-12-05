@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useRef, useState, useCallback, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "./LoginSignup.module.css";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { useAuth } from "../contexts/AuthContext";
 import { Alert } from "react-bootstrap";
+import useSearchParams from "../hooks/search-params/useSearchParams";
 
 export type LoginSignupProps = {
   name: string;
@@ -29,7 +30,19 @@ function LoginSignup({
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { search } = useLocation();
+  const { user } = useAuth();
+
+  const { redirect, player } = useSearchParams();
+
+  const performRedirect = useCallback(() => {
+    if (!redirect) return navigate("/");
+    if (!player) return navigate(`/${redirect}`);
+    return navigate(`/${redirect}?player=${player}`);
+  }, [navigate, player, redirect]);
+
+  useEffect(() => {
+    if (user) performRedirect();
+  }, [performRedirect, user]);
 
   async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -42,10 +55,8 @@ function LoginSignup({
           ? await login(emailRef.current?.value!, passwordRef.current?.value!)
           : await signup(emailRef.current?.value!, passwordRef.current?.value!);
       }
-      isLogin
-        ? navigate(`/${search.substr(1).replace("_", "/")}`)
-        : navigate("/");
-    } catch {
+      isLogin ? performRedirect() : navigate("/");
+    } catch (error) {
       {
         isLogin
           ? setError("Failed to log in")

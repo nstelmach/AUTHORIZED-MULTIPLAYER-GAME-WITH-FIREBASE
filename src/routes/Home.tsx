@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useCreateRoom from "../hooks/useCreateRoom";
 
 function Home() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const { createRoom, isCreatingRoom } = useCreateRoom();
 
   async function handleCreateRoom() {
@@ -27,7 +27,7 @@ function Home() {
               type="button"
               disabled={false}
               className={classes.button}
-              text="Create new room"
+              text={`Creat${isCreatingRoom ? "ing" : "e"} new room`}
             />
           </div>
 

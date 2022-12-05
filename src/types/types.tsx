@@ -1,3 +1,7 @@
+export type CircleOrCross = SYMBOL | null;
+
+export type SYMBOL = "X" | "O";
+
 export enum GameStatus {
   Draw = "draw",
   XWinner = "xWinner",
@@ -12,6 +16,5 @@ export interface Room {
   gameStatus: GameStatus;
   playerXId?: string;
   playerOId?: string;
+  owner: string;
 }
-
-export type CircleOrCross = "X" | "O" | null;

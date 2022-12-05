@@ -10,11 +10,11 @@ interface Output {
   markBoard: (boardIndex: number, room: Room) => void;
 }
 
-const useMarkBoard = (room: Room): Output => {
+const useMarkBoard = (): Output => {
   const { roomId } = useParams();
   const [isMarking, setIsMarking] = useState<boolean>(false);
 
-  async function markBoard(boardIndex: number) {
+  async function markBoard(boardIndex: number, room: Room) {
     setIsMarking(true);
     try {
       // const document = await getDoc(doc(db, "rooms", roomId));

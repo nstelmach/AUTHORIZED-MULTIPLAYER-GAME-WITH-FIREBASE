@@ -20,7 +20,7 @@ function App() {
           }
         />
         <Route
-          path="login"
+          path="/login"
           element={
             <LoginSignup
               name="Login"
@@ -34,7 +34,7 @@ function App() {
         />
 
         <Route
-          path="signup"
+          path="/signup"
           element={
             <LoginSignup
               name="Sign Up"
@@ -48,23 +48,16 @@ function App() {
         />
 
         <Route
-          path="history"
+          path="/history"
           element={
             <PrivateRoute>
               <History />
             </PrivateRoute>
           }
         />
+        <Route path="/r/:roomId" element={<NewGame isPlayerGame={true} />} />
         <Route
-          path="/r/:roomId"
-          element={
-            <PrivateRoute>
-              <NewGame isPlayerGame={true} />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="computergame"
+          path="/computergame"
           element={
             <PrivateRoute>
               <NewGame isPlayerGame={false} />

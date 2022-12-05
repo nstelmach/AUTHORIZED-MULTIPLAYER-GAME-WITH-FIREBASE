@@ -18,12 +18,12 @@ const useRoom = (): Output => {
     const unsubscribe = onSnapshot(doc(db, "rooms", roomId!), (doc) => {
       if (doc.exists()) setRoom({ ...doc.data(), id: doc.id } as Room);
       else console.log("Room Not Found");
-      setIsFetching(false);
+      if (isFetching) setIsFetching(false);
     });
     return () => {
       unsubscribe();
     };
-  }, [roomId]);
+  }, [roomId, isFetching]);
   return { isFetching, room };
 };
 

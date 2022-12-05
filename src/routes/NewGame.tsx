@@ -92,9 +92,10 @@ export function getUpdatedGame(
 function NewGame({ isPlayerGame }: NewGameProps) {
   const { roomId } = useParams();
   const { isFetching, room } = useRoom();
-  const { isMarking, markBoard } = useMarkBoard(room!);
+  const { isMarking, markBoard } = useMarkBoard();
+
   const { game, gameStatus, playerOId, playerXId } = room || {};
-  const { clearBoard } = useClearBoard();
+  const { clearBoard, isClearing } = useClearBoard();
   const { user } = useAuth();
 
   if (isFetching) return <h1>Loading Room...</h1>;
@@ -109,16 +110,12 @@ function NewGame({ isPlayerGame }: NewGameProps) {
   // });
 
   async function onSquareClickHandler(index: number) {
-    if (!isMarking && game![index] === null) {
+    if (!isMarking && !game![index]) {
       if (
         (gameStatus === GameStatus.XTurn && user?.uid === playerXId) ||
         (gameStatus === GameStatus.OTurn && user?.uid === playerOId)
       )
         await markBoard(index, room!);
-    }
-
-    if (isMarking && !game![index]) {
-      game![index] = null;
     }
 
     // setStateGame(({ game, gameStatus }) => {
@@ -176,7 +173,7 @@ function NewGame({ isPlayerGame }: NewGameProps) {
               onClick={clearBoard}
               className={`${classes.link} ${classes.subtitles}`}
             >
-              Reset Game
+              Reset{isClearing ? "ing" : ""} Game
             </div>
           )}
         </div>
