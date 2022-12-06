@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Home from "./routes/Home";
 import LoginSignup from "./routes/LoginSignup";
 import History from "./routes/History";
@@ -8,19 +8,13 @@ import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
+  const location = useLocation();
+  console.log(location);
   return (
     <AuthProvider>
       <Routes>
         <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/login"
+          path="login"
           element={
             <LoginSignup
               name="Login"
@@ -34,7 +28,7 @@ function App() {
         />
 
         <Route
-          path="/signup"
+          path="signup"
           element={
             <LoginSignup
               name="Sign Up"
@@ -48,7 +42,7 @@ function App() {
         />
 
         <Route
-          path="/history"
+          path="history"
           element={
             <PrivateRoute>
               <History />
@@ -57,13 +51,22 @@ function App() {
         />
         <Route path="/r/:roomId" element={<NewGame isPlayerGame={true} />} />
         <Route
-          path="/computergame"
+          path="computergame"
           element={
             <PrivateRoute>
               <NewGame isPlayerGame={false} />
             </PrivateRoute>
           }
         />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </AuthProvider>
   );

@@ -19,7 +19,7 @@ const useJoinRoom = (): Output => {
       const document = await getDoc(doc(db, "rooms", roomId!));
       if (document.exists()) {
         const data = document.data();
-        if (data.playerOId === userId || data.playerXId === userId)
+        if (data?.playerOId === userId || data?.playerXId === userId)
           return alert("You can't join the game more than once!");
         await updateDoc(doc(db, "rooms", roomId!), {
           [player === "X" ? "playerXId" : "playerOId"]: userId,
