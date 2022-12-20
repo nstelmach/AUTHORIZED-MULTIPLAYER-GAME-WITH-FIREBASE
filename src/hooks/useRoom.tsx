@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { Room } from "../types/types";
 
 interface Output {

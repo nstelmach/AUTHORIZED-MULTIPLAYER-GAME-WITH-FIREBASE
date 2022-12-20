@@ -1,19 +1,27 @@
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { SYMBOL } from "../types/types";
 
 interface Output {
   isJoining: boolean;
-  joinRoom: (player: SYMBOL, userId: string) => void;
+  joinRoom: (
+    player: SYMBOL,
+    userId: string,
+    userDisplayName: string | null
+  ) => void;
 }
 
 const useJoinRoom = (): Output => {
   const { roomId } = useParams();
   const [isJoining, setIsJoining] = useState(false);
 
-  async function joinRoom(player: SYMBOL, userId: string) {
+  async function joinRoom(
+    player: SYMBOL,
+    userId: string,
+    userDisplayName: string | null
+  ) {
     setIsJoining(true);
     try {
       const document = await getDoc(doc(db, "rooms", roomId!));
@@ -23,6 +31,8 @@ const useJoinRoom = (): Output => {
           return alert("You can't join the game more than once!");
         await updateDoc(doc(db, "rooms", roomId!), {
           [player === "X" ? "playerXId" : "playerOId"]: userId,
+          [player === "X" ? "playerXDisplayName" : "playerODisplayName"]:
+            userDisplayName,
         });
       }
     } catch (err) {

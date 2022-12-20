@@ -1,26 +1,11 @@
-.wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-}
-
-.contentWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50%;
-  width: 50%;
-  flex-direction: column;
-  margin-top: 5%;
-}
-
 .buttonsWrapper {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  flex-direction: row;
+  margin: 10%;
   height: 100%;
-  width: 100%;
+  min-width: 50%;
 }
 
 .button {
@@ -32,17 +17,13 @@
   margin-top: 60px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 680px) {
   .buttonsWrapper {
     flex-direction: column;
     justify-content: center;
     height: auto;
   }
-  .contentWrapper {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-  }
+
   .button {
     margin-top: 40px;
   }
@@ -52,12 +33,7 @@
   }
 }
 
-@media (min-width: 601px) and (max-width: 900px) {
-  .contentWrapper {
-    height: 70%;
-    width: 100%;
-    margin-top: 10%;
-  }
+@media (min-width: 681px) and (max-width: 1040px) {
   .button {
     font-size: 24px;
     padding: 25px;
@@ -68,5 +44,6 @@
   }
   .buttonsWrapper {
     height: 40%;
+    width: 90%;
   }
 }

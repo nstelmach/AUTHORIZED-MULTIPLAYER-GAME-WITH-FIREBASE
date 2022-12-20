@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { doc, updateDoc } from "firebase/firestore";
-
 import { db } from "../firebase";
 import { SYMBOL } from "../types/types";
 
@@ -19,6 +18,7 @@ const useLeaveRoom = (): Output => {
     try {
       await updateDoc(doc(db, "rooms", roomId!), {
         [player === "X" ? "playerXId" : "playerOId"]: null,
+        [player === "X" ? "playerXDisplayName" : "playerODisplayName"]: null,
       });
     } catch (err) {
       console.error(err);

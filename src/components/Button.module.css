@@ -14,4 +14,11 @@
   border: 1px solid #edcd5a;
   font-size: 20px;
   padding: 20px;
+  margin: 10px;
+}
+
+@media (max-width: 600px) {
+  .button {
+    width: 70%;
+  }
 }

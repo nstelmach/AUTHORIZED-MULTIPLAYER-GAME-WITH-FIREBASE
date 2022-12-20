@@ -50,18 +50,16 @@ function LoginSignup({
     try {
       setError("");
       setLoading(true);
-      {
-        isLogin
-          ? await login(emailRef.current?.value!, passwordRef.current?.value!)
-          : await signup(emailRef.current?.value!, passwordRef.current?.value!);
-      }
+
+      isLogin
+        ? await login(emailRef.current?.value!, passwordRef.current?.value!)
+        : await signup(emailRef.current?.value!, passwordRef.current?.value!);
+
       isLogin ? performRedirect() : navigate("/");
     } catch (error) {
-      {
-        isLogin
-          ? setError("Failed to log in")
-          : setError("Failed to create an account");
-      }
+      isLogin
+        ? setError("Failed to log in")
+        : setError("Failed to create an account");
     }
     setLoading(false);
   }
@@ -81,7 +79,6 @@ function LoginSignup({
             required
             ref={emailRef}
           />
-
           <Input
             className={classes.input}
             id="password"
@@ -90,12 +87,6 @@ function LoginSignup({
             required
             ref={passwordRef}
           />
-          {/* {isCheckbox && (
-            <div className={classes.wrapperCheck}>
-              <input className={classes.checkbox} type="checkbox"></input>
-              <label className={classes.label}>Remember Me</label>
-            </div>
-          )} */}
         </div>
         <div className={classes.buttonWrapper}>
           <Button
@@ -103,6 +94,7 @@ function LoginSignup({
             type="submit"
             className={classes.button}
             text={name}
+            isLoading={loading}
           />
           <div className={classes.questionWrapper}>
             <div className={classes.subtitles}>{question}</div>

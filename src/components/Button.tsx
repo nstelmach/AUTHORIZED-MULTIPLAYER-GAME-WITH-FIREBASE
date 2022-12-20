@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Button.module.css";
+import { RotatingLines } from "react-loader-spinner";
 
 export type ButtonProps = {
   text: string;
@@ -7,9 +8,17 @@ export type ButtonProps = {
   type: "button" | "submit" | "reset" | undefined;
   disabled: boolean;
   onClick?: () => void;
+  isLoading?: boolean;
 };
 
-function Button({ text, className, type, disabled, onClick }: ButtonProps) {
+function Button({
+  text,
+  className,
+  type,
+  disabled,
+  onClick,
+  isLoading,
+}: ButtonProps) {
   return (
     <button
       disabled={disabled}
@@ -17,7 +26,7 @@ function Button({ text, className, type, disabled, onClick }: ButtonProps) {
       className={`${classes.button} ${className}`}
       onClick={onClick}
     >
-      {text}
+      {isLoading ? <RotatingLines strokeColor="#edcd5a" width="30" /> : text}
     </button>
   );
 }

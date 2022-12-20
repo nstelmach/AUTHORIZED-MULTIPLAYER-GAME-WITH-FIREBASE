@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import classes from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 function Header() {
   const [error, setError] = useState("");
@@ -10,10 +11,16 @@ function Header() {
   const navigate = useNavigate();
 
   function menuClickHandler() {
-    document.getElementById("menu")!.style.visibility === "visible"
-      ? (document.getElementById("menu")!.style.visibility = "hidden")
-      : (document.getElementById("menu")!.style.visibility = "visible");
+    document.getElementById("menu")!.style.visibility === "hidden"
+      ? (document.getElementById("menu")!.style.visibility = "visible")
+      : (document.getElementById("menu")!.style.visibility = "hidden");
   }
+
+  const closeMenu = useCallback(() => {
+    document.getElementById("menu")!.style.visibility = "hidden";
+  }, []);
+
+  const ref = useOutsideClick<HTMLDivElement>(closeMenu);
 
   async function handleLogout() {
     setError("");
@@ -29,15 +36,17 @@ function Header() {
   return (
     <div className={classes.wrapper}>
       <header className={classes.header}>
-        <div className={classes.headerWriting}>TIC TAC TOE</div>
+        <Link to="/" className={classes.headerWriting}>
+          TIC TAC TOE
+        </Link>
         <button onClick={menuClickHandler} className={classes.userIcon}>
           <i className={`${classes.icon} fa-regular fa-user fa-2x`} />
         </button>
       </header>
-      <div id="menu" className={classes.menuWrapper}>
-        <div className={classes.emailElement}>Email:</div>{" "}
+      <div id="menu" ref={ref} className={classes.menuWrapper}>
+        <div className={classes.emailElement}>User:</div>
         <div className={`${classes.emailElement} ${classes.margin}`}>
-          {user?.email}
+          {user?.displayName}
         </div>
         <Link to="/" className={classes.menuElement}>
           Home

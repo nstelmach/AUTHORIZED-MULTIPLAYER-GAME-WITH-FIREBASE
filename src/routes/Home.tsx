@@ -1,47 +1,62 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import classes from "./Home.module.css";
-import Header from "../components/Header";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import useCreateRoom from "../hooks/useCreateRoom";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { useAuth } from "../contexts/AuthContext";
 
 function Home() {
   const navigate = useNavigate();
+
   const { createRoom, isCreatingRoom } = useCreateRoom();
+  const { user } = useAuth();
 
   async function handleCreateRoom() {
     const roomId = await createRoom();
     navigate(`/r/${roomId}`);
   }
 
-  return (
-    <div className={classes.wrapper}>
-      <Header />
-      <div className={classes.contentWrapper}>
-        <div className={classes.subtitles}>Choose one</div>
-        <div className={classes.buttonsWrapper}>
-          <div>
-            <Button
-              onClick={handleCreateRoom}
-              type="button"
-              disabled={false}
-              className={classes.button}
-              text={`Creat${isCreatingRoom ? "ing" : "e"} new room`}
-            />
-          </div>
+  async function handleCreateComputerRoom() {
+    const startingTurn = Math.round(Math.random()) ? "oTurn" : "xTurn";
 
-          <Link to="/computergame">
-            <Button
-              type="button"
-              disabled={false}
-              className={classes.button}
-              text="Play with computer"
-            />
-          </Link>
-        </div>
+    let computerDetails = await getDoc(
+      doc(db, "users", user!.uid, "computer", "computer")
+    );
+    if (computerDetails.exists()) {
+      navigate("computer");
+    } else {
+      await setDoc(doc(db, "users", user!.uid, "computer", "computer"), {
+        game: [null, null, null, null, null, null, null, null, null],
+        startingTurn: startingTurn,
+        gameStatus: startingTurn,
+        owner: user?.displayName,
+      });
+      navigate("/computer");
+    }
+  }
+
+  return (
+    <>
+      <div className={classes.subtitles}>Choose one</div>
+      <div className={classes.buttonsWrapper}>
+        <Button
+          onClick={handleCreateRoom}
+          type="button"
+          disabled={false}
+          className={classes.button}
+          text={isCreatingRoom ? "Loading..." : "Play with another user"}
+        />
+        <Button
+          onClick={handleCreateComputerRoom}
+          type="button"
+          disabled={false}
+          className={classes.button}
+          text={isCreatingRoom ? "Loading..." : "Play with computer"}
+        />
       </div>
-    </div>
+    </>
   );
 }
 

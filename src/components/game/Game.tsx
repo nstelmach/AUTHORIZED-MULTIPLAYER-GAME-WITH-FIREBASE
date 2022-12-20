@@ -2,23 +2,37 @@ import React from "react";
 import Board from "./Board";
 import classes from "./Game.module.css";
 import GameEnd from "../modal/GameEnd";
-import { GameStatus } from "../../types/types";
-import { CircleOrCross } from "../../types/types";
+import { GameStatus, CircleOrCross } from "../../types/types";
 
 export type GameProps = {
   onSquareClick: (index: number) => void;
   game: CircleOrCross[];
   gameStatus: GameStatus;
-  onClick: () => void;
+  onConfirm: () => void;
+  onDecline: () => void;
+  winnerName: string | null | undefined;
 };
 
-function Game({ onSquareClick, game, gameStatus, onClick }: GameProps) {
+function Game({
+  onSquareClick,
+  game,
+  gameStatus,
+  onConfirm,
+  onDecline,
+  winnerName,
+}: GameProps) {
   return (
     <div className={classes.game}>
       <Board onSquareClick={onSquareClick} game={game} />
       {(gameStatus === GameStatus.OWinner ||
         gameStatus === GameStatus.XWinner ||
-        gameStatus === GameStatus.Draw) && <GameEnd onClick={onClick} />}
+        gameStatus === GameStatus.Draw) && (
+        <GameEnd
+          winnerName={winnerName}
+          onConfirm={onConfirm}
+          onDecline={onDecline}
+        />
+      )}
     </div>
   );
 }

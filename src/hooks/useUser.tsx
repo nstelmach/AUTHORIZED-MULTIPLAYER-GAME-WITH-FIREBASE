@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
-// import { User } from "../types/types";
 import { User } from "firebase/auth";
 
 interface Output {

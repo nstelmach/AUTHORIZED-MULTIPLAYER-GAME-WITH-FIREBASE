@@ -1,3 +1,7 @@
+.tableWrapper {
+  margin-bottom: 10%;
+}
+
 .table {
   border: 2px solid #edcd5a;
   border-collapse: collapse;
@@ -7,13 +11,13 @@
 }
 
 .th {
-  height: 50px;
+  height: 10%;
   padding: 10px;
   vertical-align: middle;
 }
 
 .td {
-  height: 30px;
+  height: 5%;
   text-align: center;
   padding: 10px;
   vertical-align: middle;
@@ -25,22 +29,6 @@
   font-size: 25px;
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* height: 100vh; */
-}
-
-.contentWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-}
-
 .chartWrapper {
   display: flex;
   justify-content: center;
@@ -48,10 +36,11 @@
   flex-direction: column;
 }
 
+.rect {
+  width: 100%;
+}
+
 @media (max-width: 600px) {
-  .contentWrapper {
-    margin-top: 100px;
-  }
 }
 
 @media (min-width: 601px) and (max-width: 900px) {

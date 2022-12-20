@@ -1,19 +1,20 @@
-import React, { MouseEvent } from "react";
+import React, { MouseEvent, useCallback, useMemo, useEffect } from "react";
 import useUser from "../hooks/useUser";
 import useJoinRoom from "../hooks/useJoinRoom";
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import useRoom from "../hooks/useRoom";
 import { SYMBOL } from "../types/types";
-import { useCallback, useMemo, useEffect } from "react";
 import useLeaveRoom from "../hooks/useLeaveRoom";
 import useSearchParams from "../hooks/search-params/useSearchParams";
+import classes from "./PlayerDisplay.module.css";
 
 export type PlayerDisplayProps = {
   player: SYMBOL;
+  isPlayerGame: boolean;
 };
 
-function PlayerDisplay({ player }: PlayerDisplayProps) {
+function PlayerDisplay({ player, isPlayerGame }: PlayerDisplayProps) {
   const auth = useAuth();
   const { isFetching, room } = useRoom();
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function PlayerDisplay({ player }: PlayerDisplayProps) {
 
   useEffect(() => {
     if (!isFetching && room && !user && auth.user && playerSearch === player)
-      joinRoom(player, auth.user.uid);
+      joinRoom(player, auth.user.uid, auth.user.displayName);
   }, [isFetching, room, user, auth.user, playerSearch, player, joinRoom]);
 
   const renderRemoveUser = useCallback(() => {
@@ -39,7 +40,10 @@ function PlayerDisplay({ player }: PlayerDisplayProps) {
       leaveRoom(player);
     }
 
-    if (auth.user?.uid === playerId || auth.user?.uid === room?.owner) {
+    if (
+      playerId &&
+      (auth.user?.uid === playerId || auth.user?.uid === room?.owner)
+    ) {
       return (
         <div onClick={handleClick}>
           {auth.user?.uid === playerId
@@ -51,22 +55,37 @@ function PlayerDisplay({ player }: PlayerDisplayProps) {
     return null;
   }, [auth.user, playerId, room, leaveRoom, player, isLeaving]);
 
+  function joinRoomHandler() {
+    if (!isPlayerGame) {
+      if (player === "O") {
+        joinRoom(player, auth.user!.uid, auth.user!.displayName);
+        joinRoom("X", "computer", "computer");
+      } else if (player === "X") {
+        joinRoom(player, auth.user!.uid, auth.user!.displayName);
+        joinRoom("O", "computer", "computer");
+      }
+    } else joinRoom(player, auth.user!.uid, auth.user!.displayName);
+    return null;
+  }
+
   if (isFetching) return <h1>Loading Room...</h1>;
   if (!room) return <h1>Room Not Found</h1>;
 
   return (
-    <div>
+    <div className={classes.player}>
       Player {player}:
-      {user ? (
-        <div>
-          {user.displayName} {renderRemoveUser()}
+      {user && playerId ? (
+        <div className={classes.wrapper}>
+          <div className={classes.user}>{user.displayName}</div>
+          <div className={classes.leave}> {renderRemoveUser()}</div>
         </div>
       ) : auth.user ? (
-        <div onClick={() => joinRoom(player, auth.user!.uid)}>
+        <div className={classes.join} onClick={joinRoomHandler}>
           Join{isJoining ? "ing" : ""}
         </div>
       ) : (
         <div
+          className={classes.join}
           onClick={() => {
             navigate(`/login?redirect=r_${room.id}&player=${player}`);
           }}

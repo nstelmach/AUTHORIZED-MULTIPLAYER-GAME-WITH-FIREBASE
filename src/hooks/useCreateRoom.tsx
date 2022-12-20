@@ -25,40 +25,44 @@ const useCreateRoom = (): Output => {
 
     setIsCreatingRoom(true);
 
-    let roomId: string | undefined = undefined;
+    let output: string | undefined = undefined;
 
     try {
-      if (roomId) {
-        const foundUserRoom = await getDoc(doc(db, "rooms", roomId));
-        if (foundUserRoom.exists()) return roomId;
-      } else {
-        let newIdGenerated = false;
+      const userDetails = await getDoc(doc(db, "users", user.uid));
 
-        let roomId = genId();
+      if (userDetails.data()?.roomId) {
+        return (output = userDetails.data()?.roomId);
+      }
 
-        while (!newIdGenerated) {
-          const foundRoom = await getDoc(doc(db, "rooms", roomId));
-          if (foundRoom.exists()) roomId = genId();
-          else newIdGenerated = true;
-        }
+      let newIdGenerated = false;
 
-        await updateDoc(doc(db, "users", user?.uid), {
-          roomId,
-        });
+      let randomRoomId = genId();
+
+      while (!newIdGenerated) {
+        const foundRoom = await getDoc(doc(db, "rooms", randomRoomId));
+        if (foundRoom.exists()) randomRoomId = genId();
+        else newIdGenerated = true;
       }
 
       const startingTurn = Math.round(Math.random()) ? "oTurn" : "xTurn";
-      await setDoc(doc(db, "rooms", roomId!), {
+
+      await setDoc(doc(db, "rooms", randomRoomId), {
         game: [null, null, null, null, null, null, null, null, null],
+        startingTurn: startingTurn,
         gameStatus: startingTurn,
-        owner: user?.uid,
+        owner: user.uid,
       });
+      await updateDoc(doc(db, "users", user.uid), {
+        roomId: randomRoomId,
+      });
+
+      output = randomRoomId;
     } catch (err) {
       console.error(err);
     } finally {
       setIsCreatingRoom(false);
 
-      return roomId;
+      return output;
     }
   }
   return { createRoom, isCreatingRoom };

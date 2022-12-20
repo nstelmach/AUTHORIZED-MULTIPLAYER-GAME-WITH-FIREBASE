@@ -1,6 +1,8 @@
 .headerWriting {
   font-size: 50px;
   margin: 30px;
+  color: white;
+  text-decoration: none;
 }
 
 .header {
@@ -8,9 +10,12 @@
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  position: relative;
+  position: fixed;
+  top: 0;
   width: 100%;
   border-bottom: 2px dashed #edcd5a;
+  background-color: #4daaaa;
+  z-index: 100;
 }
 
 .userIcon {
@@ -46,10 +51,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   right: 10px;
   top: 90px;
-  z-index: 5;
+  z-index: 100;
 }
 
 .wrapper {
@@ -79,20 +84,29 @@
 
 @media (max-width: 700px) {
   .userIcon {
-    top: 150px;
-    margin-right: 20px;
+    top: 125px;
+    margin-right: 8px;
     width: 60px;
     height: 60px;
   }
   .menuWrapper {
     width: 70%;
     height: 50%;
-    right: 15px;
-    top: 220px;
+    right: 8px;
+    top: 190px;
   }
   .menuElement {
     font-size: 25px;
     margin-bottom: 20px;
+  }
+  .emailElement {
+    font-size: 20px;
+  }
+  .margin {
+    margin-bottom: 70px;
+  }
+  .headerWriting {
+    font-size: 45px;
   }
 }
 
