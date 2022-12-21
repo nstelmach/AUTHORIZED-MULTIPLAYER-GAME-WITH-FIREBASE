@@ -10,9 +10,10 @@ import ComputerGameDisplay from "../components/ComputerGameDisplay";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate } from "react-router";
+import useResetGame from "../hooks/useResetGame";
 
 function ComputerGame() {
-  const { clearBoard, isClearing } = useClearBoard();
+  const { clearBoard } = useClearBoard();
   const { user } = useAuth();
   const { isMarking, markBoard } = useMarkBoard();
   const { computerGame } = useComputer();
@@ -26,6 +27,7 @@ function ComputerGame() {
   } = computerGame || {};
 
   const navigate = useNavigate();
+  const { resetGame, isReseting } = useResetGame();
 
   function getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
@@ -147,18 +149,18 @@ function ComputerGame() {
           clearBoard(["users", user!.uid, "computer", "computer"]);
         }}
         onDecline={() => {
-          clearBoard(["users", user!.uid, "computer", "computer"]);
+          resetGame();
           navigate("/");
         }}
         winnerName={winnerName}
       />
       <div
         onClick={() => {
-          clearBoard(["users", user!.uid, "computer", "computer"]);
+          resetGame();
         }}
         className={`${classes.link} ${classes.subtitles}`}
       >
-        Reset{isClearing ? "ing" : ""} Game
+        Reset{isReseting ? "ing" : ""} Game
       </div>
     </>
   );

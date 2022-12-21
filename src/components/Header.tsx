@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import classes from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
@@ -8,15 +8,21 @@ import useOutsideClick from "../hooks/useOutsideClick";
 function Header() {
   const [error, setError] = useState("");
   const { user, logout } = useAuth();
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
 
-  function menuClickHandler() {
-    document.getElementById("menu")!.style.visibility === "hidden"
-      ? (document.getElementById("menu")!.style.visibility = "visible")
-      : (document.getElementById("menu")!.style.visibility = "hidden");
+  function openMenu() {
+    document.getElementById("menu")!.style.visibility = "visible";
   }
 
-  const closeMenu = useCallback(() => {
+  const closeMenu = useCallback((event: MouseEvent) => {
+    if (
+      document.getElementById("menu")!.style.visibility === "visible" &&
+      buttonRef.current &&
+      buttonRef.current.contains(event.target as Node)
+    ) {
+      event.stopPropagation();
+    }
     document.getElementById("menu")!.style.visibility = "hidden";
   }, []);
 
@@ -39,7 +45,7 @@ function Header() {
         <Link to="/" className={classes.headerWriting}>
           TIC TAC TOE
         </Link>
-        <button onClick={menuClickHandler} className={classes.userIcon}>
+        <button ref={buttonRef} onClick={openMenu} className={classes.userIcon}>
           <i className={`${classes.icon} fa-regular fa-user fa-2x`} />
         </button>
       </header>
