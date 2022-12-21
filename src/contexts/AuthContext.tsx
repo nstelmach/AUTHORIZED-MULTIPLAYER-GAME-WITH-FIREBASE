@@ -5,7 +5,7 @@ import {
   User,
 } from "firebase/auth";
 import React, { useContext, useState, useEffect, ReactNode } from "react";
-import { auth, db } from "../firebase";
+import { auth, db } from "../firebase/firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
 export type AuthContextType = {

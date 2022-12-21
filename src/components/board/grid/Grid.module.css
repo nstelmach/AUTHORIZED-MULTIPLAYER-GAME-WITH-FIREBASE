@@ -1,0 +1,12 @@
+.board {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .board {
+    grid-template-columns: 110px 110px 110px;
+    grid-template-rows: 110px 110px 110px;
+  }
+}

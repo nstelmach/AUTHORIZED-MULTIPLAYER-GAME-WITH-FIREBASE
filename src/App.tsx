@@ -1,13 +1,13 @@
 import React from "react";
 import { AuthProvider } from "./contexts/AuthContext";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
-import Home from "./routes/Home";
-import LoginSignup from "./routes/LoginSignup";
-import History from "./routes/History";
-import NewGame from "./routes/NewGame";
-import ComputerGame from "./routes/ComputerGame";
-import Layout from "./components/layouts/Layout";
+import PrivateRoute from "./components/private-route/PrivateRoute";
+import Home from "./routes/home/Home";
+import LoginSignup from "./routes/login-signup/LoginSignup";
+import History from "./routes/history/History";
+import NewGame from "./routes/game/PlayerGame";
+import ComputerGame from "./routes/game/ComputerGame";
+import Layout from "./components/layout/Layout";
 
 function App() {
   return (

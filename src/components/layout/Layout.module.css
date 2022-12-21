@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.contentWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  height: calc(100% - 125px);
+  flex-direction: column;
+}
+
+@media (max-width: 1000px) {
+  .contentWrapper {
+    width: 90%;
+  }
+}

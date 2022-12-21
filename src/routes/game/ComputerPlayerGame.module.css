@@ -1,0 +1,51 @@
+.linkWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.link {
+  font-size: 20px;
+}
+
+.subtitles {
+  margin: 18px;
+  font-size: 24px;
+}
+
+.link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .score {
+    margin-top: 100px;
+  }
+
+  .subtitles {
+    margin-top: 30px;
+  }
+  .link {
+    text-decoration: underline;
+    text-align: center;
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .link,
+  .subtitles {
+    font-size: 22px;
+  }
+  .link {
+    text-decoration: underline;
+  }
+  .subtitles {
+    margin-top: 20px;
+  }
+  .playerWrapper {
+    margin-bottom: 30px;
+  }
+}

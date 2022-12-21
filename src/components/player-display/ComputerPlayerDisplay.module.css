@@ -1,0 +1,46 @@
+.player {
+  font-size: 25px;
+  margin: 10px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.user {
+  padding-left: 10px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.leave {
+  margin-left: 25px;
+}
+
+.join {
+  padding-left: 10px;
+}
+
+.join:hover,
+.leave:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .player {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .player {
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+}

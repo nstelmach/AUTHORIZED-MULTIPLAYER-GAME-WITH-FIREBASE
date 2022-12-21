@@ -1,0 +1,47 @@
+.buttonsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  width: 100%;
+}
+
+.button {
+  width: 100%;
+}
+
+.subtitles {
+  font-size: 30px;
+  margin-bottom: 10%;
+}
+
+@media (max-width: 660px) {
+  .buttonsWrapper {
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+  }
+
+  .button {
+    margin-top: 40px;
+  }
+  .subtitles {
+    margin: 0px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 661px) and (max-width: 1350px) {
+  .button {
+    font-size: 24px;
+    padding: 25px;
+  }
+  .subtitles {
+    margin: 30px;
+    font-size: 44px;
+  }
+  .buttonsWrapper {
+    height: 40%;
+    width: 90%;
+  }
+}

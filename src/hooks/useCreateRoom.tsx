@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { db } from "../firebase";
+import { db } from "../firebase/firebase";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 function genId(): string {
