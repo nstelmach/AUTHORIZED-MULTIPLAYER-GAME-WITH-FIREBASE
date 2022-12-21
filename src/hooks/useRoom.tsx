@@ -4,12 +4,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { Room } from "../types/types";
 
-interface Output {
-  isFetching: boolean;
-  room?: Room;
-}
-
-const useRoom = (): Output => {
+const useRoom = () => {
   const { roomId } = useParams();
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [room, setRoom] = useState<Room | undefined>();

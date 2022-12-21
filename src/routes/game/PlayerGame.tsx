@@ -29,6 +29,7 @@ function NewGame() {
   const navigate = useNavigate();
   const { leaveRoom } = useLeaveRoom();
 
+  // use memo
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, "0");
   let mm = String(today.getMonth() + 1).padStart(2, "0");
@@ -36,11 +37,13 @@ function NewGame() {
 
   let date = mm + "/" + dd + "/" + yyyy;
 
+  // use memo
   let oponent =
     user?.displayName === playerODisplayName
       ? playerXDisplayName
       : playerODisplayName;
 
+  //use memo
   let winnerName: string | null | undefined;
   if (gameStatus === GameStatus.OWinner) {
     winnerName = playerODisplayName;
@@ -50,14 +53,13 @@ function NewGame() {
     winnerName = "Draw";
   }
 
-  let randomId = Date.now().toString();
-
   useEffect(() => {
     if (
       gameStatus === GameStatus.OWinner ||
       gameStatus === GameStatus.XWinner ||
       gameStatus === GameStatus.Draw
     ) {
+      const randomId = Date.now().toString();
       setDoc(doc(db, "users", user!.uid, "history", randomId), {
         date: date,
         oponent: oponent,
@@ -72,7 +74,6 @@ function NewGame() {
     date,
     oponent,
     winnerName,
-    randomId,
   ]);
 
   if (isFetching) return <h1>Loading Room...</h1>;
@@ -118,6 +119,7 @@ function NewGame() {
       <div className={classes.linkWrapper}>
         <div className={classes.subtitles}>Link to the game: </div>
         <div className={classes.link}>
+          {/* zapisz jako env zmienna */}
           https://nstelmach.github.io/Tic-Tac-Toe/#/r/{roomId}
         </div>
       </div>

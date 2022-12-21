@@ -5,11 +5,10 @@ import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import { useAuth } from "../../contexts/AuthContext";
 import { Alert } from "react-bootstrap";
-import useSearchParams from "../../hooks/search-params/useSearchParams";
+import useSearchParams from "../../hooks/useSearchParams";
 
 export type LoginSignupProps = {
   name: string;
-  isCheckbox: boolean;
   isLogin: boolean;
   question: string;
   link: string;
@@ -18,7 +17,6 @@ export type LoginSignupProps = {
 
 function LoginSignup({
   name,
-  isCheckbox,
   isLogin,
   question,
   link,

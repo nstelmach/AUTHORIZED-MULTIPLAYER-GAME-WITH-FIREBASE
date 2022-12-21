@@ -1,3 +1,4 @@
+// dziwne do poprawy
 export type CircleOrCross = SYMBOL | null;
 
 export type SYMBOL = "X" | "O";

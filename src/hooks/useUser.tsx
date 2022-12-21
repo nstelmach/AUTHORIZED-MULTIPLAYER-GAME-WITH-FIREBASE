@@ -3,12 +3,7 @@ import { db } from "../firebase/firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { User } from "firebase/auth";
 
-interface Output {
-  user?: User;
-  isFetching: boolean;
-}
-
-const useUser = (userId?: string): Output => {
+const useUser = (userId?: string) => {
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [user, setUser] = useState<User | undefined>();
 

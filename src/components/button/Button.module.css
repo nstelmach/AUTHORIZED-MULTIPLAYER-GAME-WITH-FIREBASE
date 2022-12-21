@@ -15,10 +15,10 @@
   font-size: 20px;
   padding: 20px;
   margin: 10px;
-  width: 30%;
+  /* width: 30%; */
 }
 
-@media (max-width: 660px) {
+/* @media (max-width: 660px) {
   .button {
     width: 70%;
   }
@@ -28,4 +28,4 @@
   .button {
     width: 90%;
   }
-}
+} */

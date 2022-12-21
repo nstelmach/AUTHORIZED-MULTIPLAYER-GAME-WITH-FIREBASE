@@ -4,12 +4,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { SYMBOL } from "../types/types";
 
-interface Output {
-  isLeaving: boolean;
-  leaveRoom: (player: SYMBOL) => void;
-}
-
-const useLeaveRoom = (): Output => {
+const useLeaveRoom = () => {
   const { roomId } = useParams();
   const [isLeaving, setIsLeaving] = useState(false);
 

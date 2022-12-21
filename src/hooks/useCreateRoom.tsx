@@ -11,12 +11,7 @@ function genId(): string {
   return result;
 }
 
-interface Output {
-  createRoom: () => void;
-  isCreatingRoom: boolean;
-}
-
-const useCreateRoom = (): Output => {
+const useCreateRoom = () => {
   const { user } = useAuth();
   const [isCreatingRoom, setIsCreatingRoom] = useState(false);
 

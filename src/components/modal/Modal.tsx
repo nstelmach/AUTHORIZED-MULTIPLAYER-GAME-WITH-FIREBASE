@@ -8,6 +8,8 @@ export type ModalProps = {
   winnerName: string | null | undefined;
 };
 
+// nazwa moze byc lepsza np confirm modal
+
 function Modal({ onConfirm, onDecline, winnerName }: ModalProps) {
   return (
     <div className={classes.background}>

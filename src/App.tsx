@@ -51,7 +51,6 @@ function App() {
           element={
             <LoginSignup
               name="Login"
-              isCheckbox={true}
               isLogin={true}
               question="Need an account?"
               path="/signup"
@@ -64,7 +63,6 @@ function App() {
           element={
             <LoginSignup
               name="Sign Up"
-              isCheckbox={false}
               isLogin={false}
               question="Already a user?"
               path="/login"

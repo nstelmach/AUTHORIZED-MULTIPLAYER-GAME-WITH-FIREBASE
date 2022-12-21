@@ -29,6 +29,7 @@ function ComputerGame() {
   const navigate = useNavigate();
   const { resetGame, isReseting } = useResetGame();
 
+  // move to utils
   function getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -89,7 +90,7 @@ function ComputerGame() {
       }
     }
   }
-
+  // use memo
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, "0");
   let mm = String(today.getMonth() + 1).padStart(2, "0");
@@ -97,11 +98,13 @@ function ComputerGame() {
 
   let date = mm + "/" + dd + "/" + yyyy;
 
+  // use memo
   let oponent =
     user?.displayName === playerODisplayName
       ? playerXDisplayName
       : playerODisplayName;
 
+  // use memo
   let winnerName: string | null | undefined;
   if (gameStatus === GameStatus.OWinner) {
     winnerName = playerODisplayName;
@@ -136,7 +139,6 @@ function ComputerGame() {
 
   return (
     <>
-      {" "}
       <div className={classes.playerWrapper}>
         <ComputerGameDisplay player="X" />
         <ComputerGameDisplay player="O" />

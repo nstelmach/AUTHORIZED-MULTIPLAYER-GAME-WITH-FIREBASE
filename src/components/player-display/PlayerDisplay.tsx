@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useRoom from "../../hooks/useRoom";
 import { SYMBOL } from "../../types/types";
 import useLeaveRoom from "../../hooks/useLeaveRoom";
-import useSearchParams from "../../hooks/search-params/useSearchParams";
+import useSearchParams from "../../hooks/useSearchParams";
 import classes from "./ComputerPlayerDisplay.module.css";
 
 export type PlayerDisplayProps = {

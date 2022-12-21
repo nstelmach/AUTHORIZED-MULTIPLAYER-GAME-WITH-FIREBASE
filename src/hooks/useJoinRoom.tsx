@@ -4,16 +4,7 @@ import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { SYMBOL } from "../types/types";
 
-interface Output {
-  isJoining: boolean;
-  joinRoom: (
-    player: SYMBOL,
-    userId: string,
-    userDisplayName: string | null
-  ) => void;
-}
-
-const useJoinRoom = (): Output => {
+const useJoinRoom = () => {
   const { roomId } = useParams();
   const [isJoining, setIsJoining] = useState(false);
 
