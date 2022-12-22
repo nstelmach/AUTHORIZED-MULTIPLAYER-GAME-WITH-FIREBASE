@@ -40,8 +40,8 @@ function ComputerGameDisplay({ player }: ComputerGameDisplayProps) {
   }
 
   return (
-    <div className={classes.player}>
-      Player {player}:
+    <div className={classes.playerWrapper}>
+      <div className={classes.player}> Player {player}:</div>
       {playerDisplayName ? (
         <div className={classes.wrapper}>
           <div className={classes.user}>{playerDisplayName}</div>
