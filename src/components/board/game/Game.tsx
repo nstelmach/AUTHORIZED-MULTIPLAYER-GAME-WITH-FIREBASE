@@ -1,7 +1,7 @@
 import React from "react";
 import Board from "../grid/Grid";
 import classes from "./Game.module.css";
-import GameEnd from "../../modal/Modal";
+import GameEnd from "../../modal/ConfirmModal";
 import { GameStatus, CircleOrCross } from "../../../types/types";
 
 export type GameProps = {

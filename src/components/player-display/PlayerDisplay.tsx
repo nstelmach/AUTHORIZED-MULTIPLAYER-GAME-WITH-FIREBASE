@@ -4,13 +4,13 @@ import useJoinRoom from "../../hooks/useJoinRoom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import useRoom from "../../hooks/useRoom";
-import { SYMBOL } from "../../types/types";
+import { CircleOrCross } from "../../types/types";
 import useLeaveRoom from "../../hooks/useLeaveRoom";
 import useSearchParams from "../../hooks/useSearchParams";
 import classes from "./ComputerPlayerDisplay.module.css";
 
 export type PlayerDisplayProps = {
-  player: SYMBOL;
+  player: CircleOrCross;
   isPlayerGame: boolean;
 };
 

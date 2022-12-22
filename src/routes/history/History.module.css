@@ -14,20 +14,20 @@
 
 .th {
   height: 10%;
-  padding: 10px;
+  padding: 0.625rem;
   vertical-align: middle;
 }
 
 .td {
   height: 5%;
   text-align: center;
-  padding: 10px;
+  padding: 0.625rem;
   vertical-align: middle;
 }
 
 .subtitles {
   text-align: center;
-  font-size: 25px;
+  font-size: 1.625rem;
   margin-top: 5%;
 }
 
@@ -45,10 +45,10 @@
 @media (min-width: 601px) and (max-width: 900px) {
   .th,
   .td {
-    font-size: 20px;
+    font-size: 1.25rem;
   }
   .subtitles {
-    font-size: 30px;
-    margin: 50px;
+    font-size: 1.875rem;
+    margin: 3.125rem;
   }
 }

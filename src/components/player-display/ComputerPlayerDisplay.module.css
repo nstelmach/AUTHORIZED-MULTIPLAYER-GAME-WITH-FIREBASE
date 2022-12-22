@@ -1,7 +1,7 @@
 .player {
-  font-size: 25px;
-  margin: 10px;
-  padding-top: 10px;
+  font-size: 1.625rem;
+  margin: 0.625rem;
+  padding-top: 0.625rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -9,7 +9,7 @@
 }
 
 .user {
-  padding-left: 10px;
+  padding-left: 0.625rem;
 }
 
 .wrapper {
@@ -18,11 +18,11 @@
 }
 
 .leave {
-  margin-left: 25px;
+  margin-left: 1.625rem;
 }
 
 .join {
-  padding-left: 10px;
+  padding-left: 0.625rem;
 }
 
 .join:hover,
@@ -33,14 +33,14 @@
 
 @media (max-width: 600px) {
   .player {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 }
 
 @media (min-width: 601px) and (max-width: 900px) {
   .player {
-    font-size: 25px;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    font-size: 1.625rem;
+    margin-top: 1.25rem;
+    margin-bottom: 0.625rem;
   }
 }

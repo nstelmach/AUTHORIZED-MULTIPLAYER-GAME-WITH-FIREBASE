@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import Game from "../../components/board/game/Game";
 import classes from "./ComputerPlayerGame.module.css";
 import useRoom from "../../hooks/useRoom";
 import useMarkBoard from "../../hooks/useMarkBoard";
 import { useNavigate, useParams } from "react-router-dom";
 import useClearBoard from "../../hooks/useClearBoard";
-import { GameStatus, SYMBOL } from "../../types/types";
+import { GameStatus, CircleOrCross } from "../../types/types";
 import { useAuth } from "../../contexts/AuthContext";
 import PlayerDisplay from "../../components/player-display/PlayerDisplay";
 import { doc, setDoc } from "firebase/firestore";
@@ -29,29 +29,35 @@ function NewGame() {
   const navigate = useNavigate();
   const { leaveRoom } = useLeaveRoom();
 
-  // use memo
-  let today = new Date();
-  let dd = String(today.getDate()).padStart(2, "0");
-  let mm = String(today.getMonth() + 1).padStart(2, "0");
-  let yyyy = today.getFullYear();
+  const date = useMemo(() => {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, "0");
+    let mm = String(today.getMonth() + 1).padStart(2, "0");
+    let yyyy = today.getFullYear();
 
-  let date = mm + "/" + dd + "/" + yyyy;
+    let date = mm + "/" + dd + "/" + yyyy;
+    return date;
+  }, []);
 
-  // use memo
-  let oponent =
-    user?.displayName === playerODisplayName
-      ? playerXDisplayName
-      : playerODisplayName;
+  const oponent = useMemo(
+    () =>
+      user?.displayName === playerODisplayName
+        ? playerXDisplayName
+        : playerODisplayName,
+    [playerODisplayName, playerXDisplayName, user?.displayName]
+  );
 
-  //use memo
-  let winnerName: string | null | undefined;
-  if (gameStatus === GameStatus.OWinner) {
-    winnerName = playerODisplayName;
-  } else if (gameStatus === GameStatus.XWinner) {
-    winnerName = playerXDisplayName;
-  } else if (gameStatus === GameStatus.Draw) {
-    winnerName = "Draw";
-  }
+  const winnerName = useMemo(() => {
+    let winnerName: string | null | undefined;
+    if (gameStatus === GameStatus.OWinner) {
+      winnerName = playerODisplayName;
+    } else if (gameStatus === GameStatus.XWinner) {
+      winnerName = playerXDisplayName;
+    } else if (gameStatus === GameStatus.Draw) {
+      winnerName = "Draw";
+    }
+    return winnerName;
+  }, [gameStatus, playerODisplayName, playerXDisplayName]);
 
   useEffect(() => {
     if (
@@ -105,7 +111,7 @@ function NewGame() {
         }}
         onDecline={() => {
           clearBoard(["rooms", roomId!]);
-          let player: SYMBOL | null =
+          let player: CircleOrCross | null =
             user?.uid === playerOId
               ? "O"
               : user?.uid === playerXId
@@ -118,10 +124,7 @@ function NewGame() {
       />
       <div className={classes.linkWrapper}>
         <div className={classes.subtitles}>Link to the game: </div>
-        <div className={classes.link}>
-          {/* zapisz jako env zmienna */}
-          https://nstelmach.github.io/Tic-Tac-Toe/#/r/{roomId}
-        </div>
+        <div className={classes.link}>{process.env.LINK}</div>
       </div>
     </>
   );

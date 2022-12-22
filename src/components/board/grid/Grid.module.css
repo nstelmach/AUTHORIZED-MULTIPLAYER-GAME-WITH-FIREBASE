@@ -1,12 +1,12 @@
 .board {
   display: grid;
-  grid-template-columns: 100px 100px 100px;
-  grid-template-rows: 100px 100px 100px;
+  grid-template-columns: 6.25rem 6.25rem 6.25rem;
+  grid-template-rows: 6.25rem 6.25rem 6.25rem;
 }
 
 @media (min-width: 601px) and (max-width: 900px) {
   .board {
-    grid-template-columns: 110px 110px 110px;
-    grid-template-rows: 110px 110px 110px;
+    grid-template-columns: 6.875rem 6.875rem 6.875rem;
+    grid-template-rows: 6.875rem 6.875rem 6.875rem;
   }
 }

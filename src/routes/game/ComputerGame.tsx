@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import useClearBoard from "../../hooks/useClearBoard";
 import { useAuth } from "../../contexts/AuthContext";
 import { GameStatus } from "../../types/types";
@@ -11,6 +11,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { useNavigate } from "react-router";
 import useResetGame from "../../hooks/useResetGame";
+import getRandomInt from "../../utils/getRandomInt";
 
 function ComputerGame() {
   const { clearBoard } = useClearBoard();
@@ -28,13 +29,6 @@ function ComputerGame() {
 
   const navigate = useNavigate();
   const { resetGame, isReseting } = useResetGame();
-
-  // move to utils
-  function getRandomInt(min: number, max: number) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
 
   useEffect(() => {
     if (!game) {
@@ -90,29 +84,35 @@ function ComputerGame() {
       }
     }
   }
-  // use memo
-  let today = new Date();
-  let dd = String(today.getDate()).padStart(2, "0");
-  let mm = String(today.getMonth() + 1).padStart(2, "0");
-  let yyyy = today.getFullYear();
+  const date = useMemo(() => {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, "0");
+    let mm = String(today.getMonth() + 1).padStart(2, "0");
+    let yyyy = today.getFullYear();
 
-  let date = mm + "/" + dd + "/" + yyyy;
+    let date = mm + "/" + dd + "/" + yyyy;
+    return date;
+  }, []);
 
-  // use memo
-  let oponent =
-    user?.displayName === playerODisplayName
-      ? playerXDisplayName
-      : playerODisplayName;
+  const oponent = useMemo(
+    () =>
+      user?.displayName === playerODisplayName
+        ? playerXDisplayName
+        : playerODisplayName,
+    [playerODisplayName, playerXDisplayName, user?.displayName]
+  );
 
-  // use memo
-  let winnerName: string | null | undefined;
-  if (gameStatus === GameStatus.OWinner) {
-    winnerName = playerODisplayName;
-  } else if (gameStatus === GameStatus.XWinner) {
-    winnerName = playerXDisplayName;
-  } else if (gameStatus === GameStatus.Draw) {
-    winnerName = "Draw";
-  }
+  const winnerName = useMemo(() => {
+    let winnerName: string | null | undefined;
+    if (gameStatus === GameStatus.OWinner) {
+      winnerName = playerODisplayName;
+    } else if (gameStatus === GameStatus.XWinner) {
+      winnerName = playerXDisplayName;
+    } else if (gameStatus === GameStatus.Draw) {
+      winnerName = "Draw";
+    }
+    return winnerName;
+  }, [gameStatus, playerODisplayName, playerXDisplayName]);
 
   useEffect(() => {
     if (

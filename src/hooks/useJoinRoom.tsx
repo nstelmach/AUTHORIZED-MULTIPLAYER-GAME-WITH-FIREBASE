@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-import { SYMBOL } from "../types/types";
+import { CircleOrCross } from "../types/types";
 
 const useJoinRoom = () => {
   const { roomId } = useParams();
   const [isJoining, setIsJoining] = useState(false);
 
   async function joinRoom(
-    player: SYMBOL,
+    player: CircleOrCross,
     userId: string,
     userDisplayName: string | null
   ) {

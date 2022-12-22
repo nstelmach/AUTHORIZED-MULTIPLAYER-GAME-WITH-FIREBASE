@@ -1,7 +1,4 @@
-// dziwne do poprawy
-export type CircleOrCross = SYMBOL | null;
-
-export type SYMBOL = "X" | "O";
+export type CircleOrCross = "X" | "O";
 
 export enum GameStatus {
   Draw = "draw",

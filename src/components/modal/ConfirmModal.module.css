@@ -1,6 +1,6 @@
 .button {
-  margin: 20px 0;
-  width: 150px;
+  margin: 1.25rem 0;
+  width: 9.375rem;
 }
 
 .buttonsWrapper {
@@ -12,8 +12,8 @@
 .wrapper {
   background-color: white;
   width: 60%;
-  max-width: 700px;
-  border-radius: 20px;
+  max-width: 43.75rem;
+  border-radius: 1.25rem;
   border: 3px solid #edcd5a;
 }
 
@@ -33,8 +33,8 @@
 .subtitles {
   text-align: center;
   color: #2a6767;
-  margin: 20px 0;
-  font-size: 25px;
+  margin: 1.25rem 0;
+  font-size: 1.625rem;
 }
 
 @media (max-width: 600px) {
@@ -48,9 +48,9 @@
     width: 60%;
   }
   .subtitles {
-    font-size: 30px;
+    font-size: 1.875rem;
   }
   .button {
-    font-size: 25px;
+    font-size: 1.625rem;
   }
 }

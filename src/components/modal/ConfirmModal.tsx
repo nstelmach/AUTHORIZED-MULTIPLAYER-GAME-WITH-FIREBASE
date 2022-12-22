@@ -1,16 +1,14 @@
 import React from "react";
-import classes from "./Modal.module.css";
+import classes from "./ConfirmModal.module.css";
 import Button from "../button/Button";
 
-export type ModalProps = {
+export type ConfirmModalProps = {
   onConfirm: () => void;
   onDecline: () => void;
   winnerName: string | null | undefined;
 };
 
-// nazwa moze byc lepsza np confirm modal
-
-function Modal({ onConfirm, onDecline, winnerName }: ModalProps) {
+function ConfirmModal({ onConfirm, onDecline, winnerName }: ConfirmModalProps) {
   return (
     <div className={classes.background}>
       <div className={classes.wrapper}>
@@ -40,4 +38,4 @@ function Modal({ onConfirm, onDecline, winnerName }: ModalProps) {
   );
 }
 
-export default Modal;
+export default ConfirmModal;

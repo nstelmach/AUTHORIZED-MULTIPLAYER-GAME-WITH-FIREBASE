@@ -1,13 +1,13 @@
 import React, { useMemo } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import { SYMBOL } from "../../types/types";
+import { CircleOrCross } from "../../types/types";
 import classes from "./ComputerPlayerDisplay.module.css";
 import useComputer from "../../hooks/useComputer";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 
 export type ComputerGameDisplayProps = {
-  player: SYMBOL;
+  player: CircleOrCross;
 };
 
 function ComputerGameDisplay({ player }: ComputerGameDisplayProps) {
