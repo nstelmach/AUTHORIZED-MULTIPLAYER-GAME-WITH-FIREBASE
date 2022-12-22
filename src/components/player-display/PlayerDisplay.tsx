@@ -72,8 +72,8 @@ function PlayerDisplay({ player, isPlayerGame }: PlayerDisplayProps) {
   if (!room) return <h1>Room Not Found</h1>;
 
   return (
-    <div className={classes.player}>
-      Player {player}:
+    <div className={classes.playerWrapper}>
+      <div className={classes.player}>Player {player}:</div>
       {user && playerId ? (
         <div className={classes.wrapper}>
           <div className={classes.user}>{user.displayName}</div>

@@ -44,7 +44,14 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/r/:roomId" element={<NewGame />} />
+          <Route
+            path="/r/:roomId"
+            element={
+              <PrivateRoute>
+                <NewGame />
+              </PrivateRoute>
+            }
+          />
         </Route>
         <Route
           path="login"
