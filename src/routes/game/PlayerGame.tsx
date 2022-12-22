@@ -124,7 +124,7 @@ function NewGame() {
       />
       <div className={classes.linkWrapper}>
         <div className={classes.subtitles}>Link to the game: </div>
-        <div className={classes.link}>{process.env.LINK}</div>
+        <div className={classes.link}>{process.env.REACT_APP_LINK}</div>
       </div>
     </>
   );
