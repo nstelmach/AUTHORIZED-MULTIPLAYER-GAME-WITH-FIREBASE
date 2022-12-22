@@ -21,7 +21,7 @@
 .userIcon {
   position: absolute;
   right: 0;
-  margin-right: 2.875rem;
+  margin-right: 2.25rem;
   width: 3.125rem;
   height: 3.125rem;
   padding: 0;
@@ -45,7 +45,7 @@
   border: 1px solid #edcd5a;
   border-radius: 0.625rem;
   padding: 0.625rem;
-  width: 21.25rem;
+  width: 15rem;
   visibility: hidden;
   display: flex;
   justify-content: center;
@@ -84,7 +84,7 @@
 
 @media (max-width: 600px) {
   .userIcon {
-    top: 11.625rem;
+    top: 7.875rem;
     margin-right: 0.5rem;
     width: 3.75rem;
     height: 3.75rem;
