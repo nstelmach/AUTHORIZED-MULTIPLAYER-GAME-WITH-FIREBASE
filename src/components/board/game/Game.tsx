@@ -1,7 +1,7 @@
 import React from "react";
 import Board from "../grid/Grid";
 import classes from "./Game.module.css";
-import GameEnd from "../../modal/ConfirmModal";
+import ConfirmModal from "../../modal/ConfirmModal";
 import { GameStatus, CircleOrCross } from "../../../types/types";
 
 export type GameProps = {
@@ -27,7 +27,7 @@ function Game({
       {(gameStatus === GameStatus.OWinner ||
         gameStatus === GameStatus.XWinner ||
         gameStatus === GameStatus.Draw) && (
-        <GameEnd
+        <ConfirmModal
           winnerName={winnerName}
           onConfirm={onConfirm}
           onDecline={onDecline}
