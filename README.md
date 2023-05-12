@@ -10,4 +10,4 @@ password: 123456
 username: user2@gmail.com
 password: 123456
 
-App available on: https://nstelmach.github.io/Tic-Tac-Toe
+App available on: [https://nstelmach.github.io/Tic-Tac-Toe](https://nstelmach.github.io/AUTHORIZED-MULTIPLAYER-GAME-WITH-FIREBASE)
