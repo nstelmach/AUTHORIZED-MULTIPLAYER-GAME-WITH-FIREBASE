@@ -1,7 +1,7 @@
 {
   "name": "tic-tac-toe",
   "version": "0.1.0",
-  "homepage": "https://nstelmach.github.io/AUTHORIZED-MULTIPLAYER-GAME-WITH-FIREBASE",
+  "homepage": "https://nstelmach.github.io/MULTIPLAYER-GAME-WITH-AUTHENTICATION",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
