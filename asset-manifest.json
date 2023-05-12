@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Tic-Tac-Toe/static/css/main.f3eb24f4.css",
-    "main.js": "/Tic-Tac-Toe/static/js/main.782680f4.js",
-    "index.html": "/Tic-Tac-Toe/index.html",
-    "main.f3eb24f4.css.map": "/Tic-Tac-Toe/static/css/main.f3eb24f4.css.map",
-    "main.782680f4.js.map": "/Tic-Tac-Toe/static/js/main.782680f4.js.map"
+    "main.css": "/AUTHORIZED-MULTIPLAYER-GAME-WITH-FIREBASE/static/css/main.f3eb24f4.css",
+    "main.js": "/AUTHORIZED-MULTIPLAYER-GAME-WITH-FIREBASE/static/js/main.9343a1da.js",
+    "index.html": "/AUTHORIZED-MULTIPLAYER-GAME-WITH-FIREBASE/index.html",
+    "main.f3eb24f4.css.map": "/AUTHORIZED-MULTIPLAYER-GAME-WITH-FIREBASE/static/css/main.f3eb24f4.css.map",
+    "main.9343a1da.js.map": "/AUTHORIZED-MULTIPLAYER-GAME-WITH-FIREBASE/static/js/main.9343a1da.js.map"
   },
   "entrypoints": [
     "static/css/main.f3eb24f4.css",
-    "static/js/main.782680f4.js"
+    "static/js/main.9343a1da.js"
   ]
 }
