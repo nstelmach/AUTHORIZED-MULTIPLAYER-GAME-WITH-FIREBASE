@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/MULTIPLAYER-GAME-WITH-AUTHENTICATION/static/css/main.f3eb24f4.css",
-    "main.js": "/MULTIPLAYER-GAME-WITH-AUTHENTICATION/static/js/main.8749769b.js",
+    "main.js": "/MULTIPLAYER-GAME-WITH-AUTHENTICATION/static/js/main.59fbe1dc.js",
     "index.html": "/MULTIPLAYER-GAME-WITH-AUTHENTICATION/index.html",
     "main.f3eb24f4.css.map": "/MULTIPLAYER-GAME-WITH-AUTHENTICATION/static/css/main.f3eb24f4.css.map",
-    "main.8749769b.js.map": "/MULTIPLAYER-GAME-WITH-AUTHENTICATION/static/js/main.8749769b.js.map"
+    "main.59fbe1dc.js.map": "/MULTIPLAYER-GAME-WITH-AUTHENTICATION/static/js/main.59fbe1dc.js.map"
   },
   "entrypoints": [
     "static/css/main.f3eb24f4.css",
-    "static/js/main.8749769b.js"
+    "static/js/main.59fbe1dc.js"
   ]
 }
